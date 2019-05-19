@@ -32,24 +32,35 @@ fun minimumBribes(q: Array<Int>): Unit {
 private fun countTotalBribes(q: Array<Int>): Int? {
     val arr = q.copyOf()
 
-    val swaps = mutableMapOf<Int, Int>()
-    for (i in 0 until arr.size) {
-        for (j in i until arr.size - 1) {
+    var totalBribes = 0
 
-            val currValue = arr[j]
-            val nextValue = arr[j+1]
-            if (currValue > nextValue) {
-                val swapsCount = swaps.getOrPut(currValue) { 0 } + 1
-                if (swapsCount > 2) return null
+    for (expectedPos in arr.lastIndex downTo 0) {
+        val expectedValue = expectedPos + 1
+        val seekRange = (max(expectedPos - 2, 0)..expectedPos)
+        val currentPos = arr.findIndex(expectedValue, seekRange)
 
-                swaps[currValue] = swapsCount
-                arr[j] = nextValue
-                arr[j+1] = currValue
-            }
+        if (currentPos == null) return null
+
+        if (currentPos < expectedPos - 1) {
+            arr[expectedPos - 2] = arr[expectedPos - 1]
+            totalBribes++
         }
+        if (currentPos < expectedPos) {
+            arr[expectedPos - 1] = arr[expectedPos]
+            totalBribes++
+        }
+        arr[expectedPos] = expectedValue
     }
 
-    return swaps.values.sum()
+    return totalBribes
+}
+
+private fun Array<Int>.findIndex(value: Int, inRange: IntRange): Int? {
+    for (i in inRange) {
+        if (this[i] == value) return i
+    }
+
+    return null
 }
 
 fun main(args: Array<String>) {
