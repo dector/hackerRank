@@ -1,10 +1,5 @@
-# Intellij files
-.idea/
-*.iml
+# Ignore Gradle project-specific cache directory
+.gradle
 
-# Gradle files
-.gradle/
-
-# Build files
-out/
-build/
+# Ignore Gradle build output directory
+build

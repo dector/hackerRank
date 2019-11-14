@@ -1,7 +1,14 @@
 /* https://www.hackerrank.com/challenges/funny-string/ */
 
-fun foo() {
+fun funnyString(s: String): Boolean {
+    fun String.represent() = zipWithNext { a, b -> b - a }
 
+    val straightRepresentation = s
+        .represent()
+    val reversedRepresentation = s.reversed()
+        .represent()
+
+    return straightRepresentation == reversedRepresentation
 }
 
 fun main() {
@@ -11,7 +18,7 @@ fun main() {
     for (i in 1..q) {
         val s = scan.nextLine().trim().toInt()
 
-        val result = foo(n)
+        val result = if (funnyString(s)) "Funny" else "Not Funny"
         println(result)
     }
 }
