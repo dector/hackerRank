@@ -20,7 +20,7 @@ import kotlin.ranges.*
 import kotlin.sequences.*
 import kotlin.text.*
 
-fun minimumAbsoluteDifference(arr: Array<Int>): Int {
+private fun minimumAbsoluteDifference(arr: Array<Int>): Int {
     var diff = Int.MAX_VALUE
 
     for (i in 0 until arr.lastIndex) {
