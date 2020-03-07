@@ -13,5 +13,7 @@ dependencies {
 }
 
 sourceSets.getByName("main").withConvention(KotlinSourceSet::class) {
-    kotlin.srcDir("Algorithms")
+    val sources = listOf("Algorithms", "Other")
+
+    kotlin.srcDir(sources)
 }
